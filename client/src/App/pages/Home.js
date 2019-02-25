@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 // import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
-import { Dashboard }  from 'material-dashboard-react'; 
-
+// import { Dashboard }  from 'material-dashboard-react'; 
 
 class Home extends Component {
   render() {
@@ -16,7 +15,7 @@ class Home extends Component {
         </button>
       </Link>
   
-      <Dashboard/>
+      {/* <Dashboard/> */}
 
     </div>
     );
