@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+// import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
+import { Dashboard }  from 'material-dashboard-react'; 
 
 
 class Home extends Component {
@@ -13,6 +15,9 @@ class Home extends Component {
             My List
         </button>
       </Link>
+  
+      <Dashboard/>
+
     </div>
     );
   }
