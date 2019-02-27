@@ -2,6 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+//TODO: Fix styles
+
+import { createMuiTheme } from '@material-ui/core/styles';
+
+
+
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -17,8 +24,30 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import SimpleLineChart from './SimpleLineChart';
 import SimpleTable from './SimpleTable';
+import '../../stylesheets/dashboard.scss'; 
 
 const drawerWidth = 240;
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#000000',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '##a5a5a5',
+      main: '#5e5e5e',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#fff051',
+    },
+    // error: will use the default color
+  },
+});
+
+
 
 const styles = theme => ({
   root: {
@@ -114,10 +143,11 @@ class Dashboard extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} id="dashboard-component">
         <CssBaseline />
         <AppBar
           position="absolute"
+          color="primary"
           className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
         >
           <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
@@ -139,7 +169,7 @@ class Dashboard extends React.Component {
               noWrap
               className={classes.title}
             >
-              Dashboard
+              Firefighting Hazmat Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -168,7 +198,7 @@ class Dashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Typography variant="h4" gutterBottom component="h2">
-            Orders
+            Heart Rate
           </Typography>
           <Typography component="div" className={classes.chartContainer}>
             <SimpleLineChart />
