@@ -13,9 +13,9 @@ app.get('/api/getList', (req,res) => {
     console.log('Sent list of items');
 });
 
-// Handles any requests that don't match the ones above
+// Serving React
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 
 const port = process.env.PORT || 5000;
