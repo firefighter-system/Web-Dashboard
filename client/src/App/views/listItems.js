@@ -4,11 +4,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
+import GroupIcon from '@material-ui/icons/GroupWork';
+import VitalsIcon from '@material-ui/icons/BarChart';
+import HistoryIcon from '@material-ui/icons/CloudCircle';
+import LocationIcon from '@material-ui/icons/MyLocation';
+import ContactIcon from '@material-ui/icons/Call'; 
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import SettingsIcon from '@material-ui/icons/Settings'; 
 
 export const mainListItems = (
   <div>
@@ -20,31 +22,31 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <GroupIcon />
       </ListItemIcon>
       <ListItemText primary="Team" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <VitalsIcon />
       </ListItemIcon>
       <ListItemText primary="Vitals" />
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
+        <HistoryIcon />
       </ListItemIcon>
       <ListItemText primary="History" />
-    </ListItem>
+    </ListItem> */}
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <LocationIcon />
       </ListItemIcon>
       <ListItemText primary="Location" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <ContactIcon />
       </ListItemIcon>
       <ListItemText primary="Contact" />
     </ListItem>
@@ -62,7 +64,7 @@ export const secondaryListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <SettingsIcon />
       </ListItemIcon>
       <ListItemText primary="Settings" />
     </ListItem>
