@@ -15,7 +15,7 @@ app.get('/api/getList', (req,res) => {
 
 // Serving React
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/public/index.html'));
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
