@@ -6,7 +6,6 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import GroupIcon from '@material-ui/icons/GroupWork';
 import VitalsIcon from '@material-ui/icons/BarChart';
-import HistoryIcon from '@material-ui/icons/CloudCircle';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import ContactIcon from '@material-ui/icons/Call'; 
 import AssignmentIcon from '@material-ui/icons/Assignment';

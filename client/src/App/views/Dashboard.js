@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 //TODO: Fix styles
 
 import { createMuiTheme } from '@material-ui/core/styles';
-
-
-
-
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -26,8 +24,9 @@ import SimpleLineChart from './SimpleLineChart';
 import SimpleTable from './SimpleTable';
 import '../../stylesheets/dashboard.scss'; 
 
-const drawerWidth = 240;
+import HeartRate from '../components/HeartRate'; 
 
+const drawerWidth = 240;
 
 const theme = createMuiTheme({
   palette: {
@@ -62,6 +61,11 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
+  },
+  paper: {
+    padding: theme.spacing.unit,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -110,8 +114,9 @@ const styles = theme => ({
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
+    margin: 50,  
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 2,
     height: '100vh',
     overflow: 'auto',
   },
@@ -196,22 +201,50 @@ class Dashboard extends React.Component {
           <List>{secondaryListItems}</List>
         </Drawer>
         <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-            <Typography variant="h4" gutterBottom component="h2">
-              Heart Rate
-            </Typography>
-          
-            <Typography component="div" className={classes.chartContainer}>
-              <SimpleLineChart />
-            </Typography>
-            
-            <Typography variant="h4" gutterBottom component="h2">
-              Products
-            </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable />
-          </div>
+          <div className={classes.appBarSpacer}>
+            <Grid container spacing={8}>
+              <Grid container item xs={12} spacing={24}>
+                <Grid item xs={6}>
+                  <Typography variant="h4" gutterBottom component="h2">
+                    Heart Rate
+                 </Typography>
 
+                  <Typography component="div" className={classes.chartContainer}>
+                    <SimpleLineChart />
+                  </Typography>
+
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="h4" gutterBottom component="h2">
+                      Body Temperature
+                  </Typography>
+                  <Typography component="div" className={classes.chartContainer}>
+                    <SimpleLineChart />
+                  </Typography>
+                </Grid>
+              </Grid>
+          
+              <Grid container item xs={12} spacing={24}>
+                <Grid item xs={6}>  
+                  <Typography variant="h4" gutterBottom component="h2">
+                    External Pressure
+                  </Typography>
+                  <Typography component="div" className={classes.chartContainer}>
+                    <SimpleLineChart />
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="h4" gutterBottom component="h2">
+                    External Temperature
+                  </Typography>
+
+                  <Typography component="div" className={classes.chartContainer}>
+                    <HeartRate/>
+                  </Typography>
+                </Grid>
+              </Grid>
+          </Grid> 
+          </div>
         </main>
       </div>
     );
