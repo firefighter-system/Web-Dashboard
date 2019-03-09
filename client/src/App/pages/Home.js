@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import ReactDOM from "react-dom";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import  Dashboard from '../views/Dashboard'; 
 
 class Home extends Component {

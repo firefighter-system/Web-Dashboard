@@ -1,38 +1,105 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { Line } from "react-chartjs-2";
 import { withStyles } from '@material-ui/core/styles';
-import RTChart from 'react-rt-chart';
 
+import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
+
+const styles = theme => ({
+  "chart-container": {
+    height: 320 
+  }
+});
 
 class HeartRate extends React.Component {
   state = {
-    loaded: false,
+    lineChartData: {
+      labels: [],
+      datasets: [{
+        type: "line",
+        label: "BTC-USD",
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        borderColor: this.props.theme.palette.primary.main,
+        pointBackgroundColor: this.props.theme.palette.secondary.main,
+        pointBorderColor: this.props.theme.palette.secondary.main,
+        borderWidth: "2",
+        lineTension: 0.45,
+        data: []
+        //data array initially empty
+      }]
+    },
+    lineChartOptions: {
+      responsive: true,
+      maintainAspectRatio: false,
+      tooltips: {
+        enabled: true
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            autoSkip: true,
+            maxTicksLimit: 10
+          }
+        }]
+      }
+    }
   };
 
   componentDidMount() {
-    setInterval(() => this.forceUpdate(), 1000);
-  } 
+    //Handles connecting/ disconnecting the feed and updating the component's state with newly fetched data
+    const subscribe = {
+      type: "subscribe",
+      channels: [{
+        name: "ticker",
+        product_ids: ["BTC-USD"]
+      }]
+    };
 
-  getRandomValue() {
-    return Math.floor(Math.random() * 300) + 1; 
+    this.ws = new WebSocket("wss://ws-feed.gdax.com");
+
+    this.ws.onopen = () => {
+      this.ws.send(JSON.stringify(subscribe));
+    };
+
+    this.ws.onmessage = e => {
+      const value = JSON.parse(e.data);
+      if (value.type !== "ticker") {
+        return;
+      }
+
+      const oldBtcDataSet = this.state.lineChartData.datasets[0];
+      const newBtcDataSet = {
+        ...oldBtcDataSet
+      };
+      newBtcDataSet.data.push(value.price);
+
+      const newChartData = {
+        ...this.state.lineChartData,
+        datasets: [newBtcDataSet],
+        labels: this.state.lineChartData.labels.concat(
+          new Date().toLocaleTimeString()
+        )
+      };
+      this.setState({
+        lineChartData: newChartData
+      });
+    };
+  }
+
+  componentWillUnmount() {
+    this.ws.close();
   }
 
   render() {
-    var data = {
-      date: new Date(),
-      Car: this.getRandomValue(),
-      Bus: this.getRandomValue()
-    };
 
-    return ( 
-      <div className="container">
-        <RTChart
-          fields={['Car','Bus']}
-          data={data} />
+    return (
+      <div>
+        <ResponsiveContainer width="99%" height={320}>
+          <Line data={this.state.lineChartData} options = {this.state.lineChartOptions}/>
+        </ResponsiveContainer>
       </div>
-    )}; 
+    );
   }
+}
 
 
-export default HeartRate;
+export default withStyles(styles, { withTheme: true })(HeartRate);
