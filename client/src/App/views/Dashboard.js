@@ -22,6 +22,7 @@ import SimpleLineChart from './SimpleLineChart';
 import styles from '../../stylesheets/dashboardStyles'; 
 
 import HeartRate from '../components/HeartRate'; 
+import BodyTemperature from '../components/BodyTemperature';
 
 class Dashboard extends React.Component {
   state = {
@@ -112,7 +113,7 @@ class Dashboard extends React.Component {
                       Body Temperature
                   </Typography>
                   <Typography component="div" className={classes.chartContainer}>
-                    <SimpleLineChart />
+                    <BodyTemperature />
                   </Typography>
                 </Grid>
               </Grid>
