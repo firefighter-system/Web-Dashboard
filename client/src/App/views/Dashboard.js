@@ -23,6 +23,7 @@ import styles from '../../stylesheets/dashboardStyles';
 
 import HeartRate from '../components/HeartRate'; 
 import BodyTemperature from '../components/BodyTemperature';
+import ExternalPressure from '../components/ExternalPressure';
 
 class Dashboard extends React.Component {
   state = {
@@ -124,7 +125,7 @@ class Dashboard extends React.Component {
                     External Pressure
                   </Typography>
                   <Typography component="div" className={classes.chartContainer}>
-                    <SimpleLineChart />
+                    <ExternalPressure />
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
