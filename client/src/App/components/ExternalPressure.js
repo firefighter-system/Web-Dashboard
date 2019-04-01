@@ -1,73 +1,59 @@
 import React, { Component } from 'react';
 import { Line } from "react-chartjs-2";
-import { Bar } from "react-chartjs-2";
 import { withStyles } from '@material-ui/core/styles';
 
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
 
 const styles = theme => ({
   "chart-container": {
-    height: 320
+    height: 320 
   }
 });
 
-var firefighters = ["Franko", "Yuhan", "Filip", "Arsham"];
-
-class BodyTemperature extends React.Component {
+class ExternalPressure extends React.Component {
   state = {
-    dataBar: {
-      labels: firefighters,
+    lineChartData: {
+      labels: [],
       datasets: [
         {
-          label: firefighters[0],
-          data: [33, 0, 0, 0],
-          backgroundColor: "rgba(245, 74, 85, 0.5)",
-          borderWidth: 1
+        type: "line",
+        label: "Filip",
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        borderColor: "rgba(185, 80, 0, 1)",
+        pointBackgroundColor: this.props.theme.palette.secondary.main,
+        pointBorderColor: this.props.theme.palette.secondary.main,
+        borderWidth: "2",
+        lineTension: 0.45,
+        data: [1, 5, 4, 6, 10, 33]
+        //data array initially empty
         },
         {
-          label: firefighters[1],
-          data: [0, 56, 0, 0],
-          backgroundColor: "rgba(90, 173, 246, 0.5)",
-          borderWidth: 1
-        },
-        {
-          label: firefighters[2],
-          data: [0, 0, 25, 0],
-          backgroundColor: "rgba(245, 192, 50, 0.5)",
-          borderWidth: 1
-        },
-        {
-          label: firefighters[3],
-          data: [0, 0, 0, 39],
-          backgroundColor: "rgba(169, 125, 70, 0.5)",
-          borderWidth: 1
-        }
+          type: "line",
+          label: "Yuhan",
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: this.props.theme.palette.primary.main,
+          pointBackgroundColor: this.props.theme.palette.secondary.main,
+          pointBorderColor: this.props.theme.palette.secondary.main,
+          borderWidth: "2",
+          lineTension: 0.45,
+          data: [2, 0, 3]
+          //data array initially empty
+          }
       ]
     },
-    barChartOptions: {
+    lineChartOptions: {
       responsive: true,
       maintainAspectRatio: false,
+      tooltips: {
+        enabled: true
+      },
       scales: {
-        xAxes: [
-            {
-              barPercentage: 1,
-              gridLines: {
-                display: true,
-                color: "rgba(0, 0, 0, 0.1)"
-              }
-            }
-          ],
-        yAxes: [
-          {
-            gridLines: {
-              display: true,
-              color: "rgba(0, 0, 0, 0.1)"
-            },
-            ticks: {
-              beginAtZero: true
-            }
+        xAxes: [{
+          ticks: {
+            autoSkip: true,
+            maxTicksLimit: 10
           }
-        ]
+        }]
       }
     }
   };
@@ -122,7 +108,7 @@ class BodyTemperature extends React.Component {
     return (
       <div>
         <ResponsiveContainer width="99%" height={320}>
-          <Line data={this.state.dataBar} options = {this.state.barChartOptions}/>
+          <Line data={this.state.lineChartData} options = {this.state.lineChartOptions}/>
         </ResponsiveContainer>
       </div>
     );
@@ -130,4 +116,4 @@ class BodyTemperature extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })(BodyTemperature);
+export default withStyles(styles, { withTheme: true })(ExternalPressure);
