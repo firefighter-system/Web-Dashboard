@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Line } from "react-chartjs-2";
+import { Line  } from "react-chartjs-2";
 import { withStyles } from '@material-ui/core/styles';
 
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
@@ -10,10 +10,12 @@ const styles = theme => ({
   }
 });
 
+
+
 class ExternalPressure extends React.Component {
   state = {
     lineChartData: {
-      labels: [],
+      labels: ['8:00 AM', '8:05 AM', '8:10 AM', '8:15 AM', '8:20 AM', '8:25 AM', '8:30 AM'],
       datasets: [
         {
         type: "line",
@@ -36,7 +38,7 @@ class ExternalPressure extends React.Component {
           pointBorderColor: this.props.theme.palette.secondary.main,
           borderWidth: "2",
           lineTension: 0.45,
-          data: [2, 0, 3]
+          data: [2, 0, 3, 1, 2, 33]
           //data array initially empty
           }
       ]
@@ -53,7 +55,18 @@ class ExternalPressure extends React.Component {
             autoSkip: true,
             maxTicksLimit: 10
           }
-        }]
+        }], 
+        yAxes: [
+          {
+            gridLines: {
+              display: true, 
+              color: "rgb(0, 0, 0, 0.1)"
+            }, 
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
       }
     }
   };

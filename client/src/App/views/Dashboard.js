@@ -21,7 +21,7 @@ import { mainListItems, secondaryListItems } from './listItems';
 import SimpleLineChart from './SimpleLineChart';
 import styles from '../../stylesheets/dashboardStyles'; 
 
-import HeartRate from '../components/HeartRate'; 
+import ExternalTemperature from '../components/ExternalTemperature'; 
 import BodyTemperature from '../components/BodyTemperature';
 import ExternalPressure from '../components/ExternalPressure';
 
@@ -134,7 +134,7 @@ class Dashboard extends React.Component {
                   </Typography>
 
                   <Typography component="div" className={classes.chartContainer}>
-                    <HeartRate/>
+                    <ExternalTemperature/>
                   </Typography>
                 </Grid>
               </Grid>

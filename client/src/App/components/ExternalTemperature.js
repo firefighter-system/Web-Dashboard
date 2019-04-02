@@ -10,7 +10,7 @@ const styles = theme => ({
   }
 });
 
-class HeartRate extends React.Component {
+class ExternalTemperature extends React.Component {
   state = {
     lineChartData: {
       labels: [],
@@ -102,4 +102,4 @@ class HeartRate extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })(HeartRate);
+export default withStyles(styles, { withTheme: true })(ExternalTemperature);
