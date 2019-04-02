@@ -122,7 +122,7 @@ class BodyTemperature extends React.Component {
     return (
       <div>
         <ResponsiveContainer width="99%" height={320}>
-          <Line data={this.state.dataBar} options = {this.state.barChartOptions}/>
+          <Bar data={this.state.dataBar} options = {this.state.barChartOptions}/>
         </ResponsiveContainer>
       </div>
     );

@@ -16,7 +16,7 @@ class ExternalTemperature extends React.Component {
       labels: [],
       datasets: [{
         type: "line",
-        label: "BTC-USD",
+        label: "Filip",
         backgroundColor: "rgba(0, 0, 0, 0)",
         borderColor: this.props.theme.palette.primary.main,
         pointBackgroundColor: this.props.theme.palette.secondary.main,
