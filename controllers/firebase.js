@@ -13,6 +13,7 @@ ref.once("value", function(snapshot) {
 });
 
 module.exports.set = function(app) {
+  //WORKS? 
   app.get('/firebase', (req,res) => {
     console.log("in firebase")
   });

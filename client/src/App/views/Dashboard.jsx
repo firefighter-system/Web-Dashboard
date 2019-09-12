@@ -18,12 +18,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import SimpleLineChart from './SimpleLineChart';
-import styles from '../../stylesheets/dashboardStyles'; 
+import SimpleLineChart from './SimpleLineChart'; 
 
 import ExternalTemperature from '../components/ExternalTemperature'; 
 import BodyTemperature from '../components/BodyTemperature';
 import ExternalPressure from '../components/ExternalPressure';
+
+import { dashboardStyles, colors } from '../../stylesheets'; 
 
 class Dashboard extends React.Component {
   state = {
@@ -47,7 +48,6 @@ class Dashboard extends React.Component {
         <CssBaseline />
         <AppBar
           position="absolute"
-          color="primary"
           className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
         >
           <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
@@ -150,4 +150,4 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(dashboardStyles)(Dashboard);

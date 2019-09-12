@@ -1,8 +1,9 @@
+import { colors } from "./colors";
 
 const drawerWidth = 240;
 
 
-const styles = theme => ({
+const dashboardStyles = theme => ({
   root: {
     display: 'flex',
   },
@@ -27,6 +28,8 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    color: colors.black, 
+    backgroundColor: colors.yellow, 
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -85,4 +88,4 @@ const styles = theme => ({
   },
 });
 
-export default styles
+export { dashboardStyles }
