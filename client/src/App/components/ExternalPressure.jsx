@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Line  } from "react-chartjs-2";
 import { withStyles } from '@material-ui/core/styles';
 
@@ -129,4 +129,4 @@ class ExternalPressure extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })(ExternalPressure);
+export default withStyles(styles, { withTheme: true })({ExternalPressure});
