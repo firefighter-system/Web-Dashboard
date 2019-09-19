@@ -102,4 +102,4 @@ class ExternalTemperature extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })({ExternalTemperature});
+export default withStyles(styles, { withTheme: true })(ExternalTemperature);

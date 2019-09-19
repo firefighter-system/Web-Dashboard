@@ -129,4 +129,4 @@ class ExternalPressure extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })({ExternalPressure});
+export default withStyles(styles, { withTheme: true })(ExternalPressure);
