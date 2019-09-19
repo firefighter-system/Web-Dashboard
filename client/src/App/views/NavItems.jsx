@@ -11,7 +11,7 @@ import ContactIcon from '@material-ui/icons/Call';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import SettingsIcon from '@material-ui/icons/Settings'; 
 
-export const mainListItems = (
+export const primaryNavItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
@@ -52,7 +52,7 @@ export const mainListItems = (
   </div>
 );
 
-export const secondaryListItems = (
+export const secondaryNavItems = (
   <div>
     <ListSubheader inset>Others</ListSubheader>
     <ListItem button>

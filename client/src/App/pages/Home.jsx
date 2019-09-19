@@ -16,7 +16,6 @@ class Home extends Component {
         {/* </button> */}
       {/* </Link> */} }
       <Dashboard></Dashboard>
-
     </div>
     );
   }

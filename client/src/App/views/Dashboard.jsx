@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,7 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-import { mainListItems, secondaryListItems } from './listItems';
+import { primaryNavItems, secondaryNavItems } from './NavItems';
 import SimpleLineChart from './SimpleLineChart'; 
 
 import ExternalTemperature from '../components/ExternalTemperature'; 
@@ -91,9 +93,9 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>{primaryNavItems}</List>
           <Divider />
-          <List>{secondaryListItems}</List>
+          <List>{secondaryNavItems}</List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer}>
