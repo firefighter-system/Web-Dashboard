@@ -7,7 +7,7 @@ firebase.initializeApp({
 });
 
 var db = firebase.database();
-var ref = db.ref("restricted_access/secret_document");
+var ref = db.ref("res");
 ref.once("value", function(snapshot) {
   console.log(snapshot.val());
 });
