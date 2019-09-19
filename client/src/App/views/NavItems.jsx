@@ -1,15 +1,19 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
+
+import WaterIcon from '@material-ui/icons/Opacity';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import GroupIcon from '@material-ui/icons/GroupWork';
 import VitalsIcon from '@material-ui/icons/BarChart';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import ContactIcon from '@material-ui/icons/Call'; 
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import SettingsIcon from '@material-ui/icons/Settings'; 
+
+
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import GroupIcon from '@material-ui/icons/GroupWork';
 
 export const primaryNavItems = (
   <div>
@@ -31,18 +35,21 @@ export const primaryNavItems = (
       </ListItemIcon>
       <ListItemText primary="Vitals" />
     </ListItem>
-    {/* <ListItem button>
+
+    <ListItem button>
       <ListItemIcon>
-        <HistoryIcon />
+        <WaterIcon />
       </ListItemIcon>
-      <ListItemText primary="History" />
-    </ListItem> */}
+      <ListItemText primary="Humidity" />
+    </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <LocationIcon />
       </ListItemIcon>
-      <ListItemText primary="Location" />
+      <ListItemText primary="Map" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <ContactIcon />
