@@ -1,4 +1,4 @@
-import { colors } from "./colors";
+import { colors } from "../../../stylesheets/colors";
 
 const drawerWidth = 240;
 

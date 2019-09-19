@@ -1,11 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
-import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,14 +17,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-import { primaryNavItems, secondaryNavItems } from './NavItems';
-import SimpleLineChart from './SimpleLineChart'; 
+import Vitals from "../../scenes/Vitals/Vitals"; 
 
-import ExternalTemperature from '../components/ExternalTemperature'; 
-import BodyTemperature from '../components/BodyTemperature';
-import ExternalPressure from '../components/ExternalPressure';
+import { primaryNavItems, secondaryNavItems } from '../NavItems';
 
-import { dashboardStyles } from '../../stylesheets'; 
+import { dashboardStyles } from './dashboardStyles'; 
 
 class Dashboard extends React.Component {
   state = {
@@ -99,48 +94,7 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer}>
-            <Grid container spacing={8}>
-              <Grid container item xs={12} spacing={24}>
-                <Grid item xs={6}>
-                  <Typography variant="h6" gutterBottom >
-                    Heart Rate
-                 </Typography>
-
-                  <Typography component="div" className={classes.chartContainer}>
-                    <SimpleLineChart />
-                  </Typography>
-
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="h6" gutterBottom >
-                      Body Temperature
-                  </Typography>
-                  <Typography component="div" className={classes.chartContainer}>
-                    <BodyTemperature />
-                  </Typography>
-                </Grid>
-              </Grid>
-          
-              <Grid container item xs={12} spacing={24}>
-                <Grid item xs={6}>  
-                  <Typography variant="h6" gutterBottom >
-                    External Pressure
-                  </Typography>
-                  <Typography component="div" className={classes.chartContainer}>
-                    <ExternalPressure />
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography variant="h6" gutterBottom >
-                    External Temperature
-                  </Typography>
-
-                  <Typography component="div" className={classes.chartContainer}>
-                    <ExternalTemperature/>
-                  </Typography>
-                </Grid>
-              </Grid>
-          </Grid> 
+            <Vitals></Vitals>
           </div>
         </main>
       </div>
