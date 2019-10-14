@@ -19,7 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import Vitals from "../../scenes/Vitals/Vitals"; 
 
-import { primaryNavItems, secondaryNavItems } from '../NavItems';
+import { primaryNavItems, secondaryNavItems } from '../NavItems/NavItems';
 
 import { dashboardStyles } from './dashboardStyles'; 
 
@@ -43,55 +43,6 @@ class Dashboard extends React.Component {
     return (
       <div className={classes.root} id="dashboard-component">
         <CssBaseline />
-        <AppBar
-          position="absolute"
-          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-        >
-          <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(
-                classes.menuButton,
-                this.state.open && classes.menuButtonHidden,
-              )}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Firefighting Hazmat Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>{primaryNavItems}</List>
-          <Divider />
-          <List>{secondaryNavItems}</List>
-        </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer}>
             <Vitals></Vitals>
