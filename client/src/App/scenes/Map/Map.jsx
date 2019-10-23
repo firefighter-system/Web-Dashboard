@@ -14,13 +14,13 @@ var customIcon = L.icon({
 });
 
 class MapComponent extends React.Component {
-
   state = {
     location: {
       lat: 45.41117,
       lng: -75.69812
     },
-    zoom: 13,
+    haveLocation: false,
+    zoom: 2,
   }
 
   componentDidMount() {
@@ -29,27 +29,48 @@ class MapComponent extends React.Component {
         location: {
           lat: position.coords.latitude,
           lng: position.coords.longitude
-        }
+        },
+        haveLocation: true,
+        zoom: 13,
       });
       console.log(position);
+    }, () => {
+      // this else function cando something else in the meantime
+      console.log('Location Unavailable');
+      fetch('https://ipapi.co/json')
+        .then(res => res.json())
+        .then(response => {
+          console.log(response)
+          this.setState({
+            location: {
+              lat: response.latitude,
+              lng: response.longitude
+            },
+            haveLocation: true,
+            zoom: 13,
+          });
+        });
     });
   }
 
   render() {
-    const position = [this.state.location.lat, this.state.location.lng]
+    const local_position = [this.state.location.lat, this.state.location.lng]
     return (
-      <Map className="leafletMap" center={position} zoom={this.state.zoom}>
+      <Map className="leafletMap" center={local_position} zoom={this.state.zoom}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker 
-          position={position} 
-          icon={customIcon}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {
+          this.state.haveLocation ?
+            <Marker 
+              position={local_position} 
+              icon={customIcon}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker> : ''
+        }
       </Map>
     )
   }
