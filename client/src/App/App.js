@@ -4,7 +4,8 @@ import './App.css';
 import Home from './pages/Home/Home';
 
 import Vitals from "./scenes/Vitals/Vitals"; 
-import Map from "./scenes/Map/Map"; 
+// import Map from "./scenes/Map/Map"; 
+import MapComponent from "./scenes/Map/Map"
 
 //TODO: FOR NAV SIDE BAR: https://reacttraining.com/react-router/web/example/sidebar
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/vitals' component={Vitals}/>
-          <Route exact path='/map' component={Map}/>
+          <Route exact path='/map' component={MapComponent}/>
         
         </Switch>
       </div>
