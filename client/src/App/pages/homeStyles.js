@@ -1,9 +1,8 @@
-import { colors } from "../../../stylesheets/colors";
+import { colors } from "../../stylesheets/colors";
+
 
 const drawerWidth = 240;
-
-
-const dashboardStyles = theme => ({
+const homeStyles = theme => ({
   root: {
     display: 'flex',
   },
@@ -88,4 +87,4 @@ const dashboardStyles = theme => ({
   },
 });
 
-export { dashboardStyles }
+export { homeStyles }
