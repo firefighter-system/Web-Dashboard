@@ -1,12 +1,12 @@
-import React from "react"; 
+import React from "react";
 
 
 class Map extends React.Component {
   render() {
     return (
-      <h1>I am the map component</h1>
+      <h1>I am the Map component</h1>
     )
   }
 }
 
-export default ( Map ); 
+export default (Map); 
