@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
+
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -22,8 +18,6 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import Dashboard from "../../views/Dashboard/Dashboard"
-import Map from "../../scenes/Map/Map"
-import Vitals from "../../scenes/Vitals/Vitals"
 
 import { primaryNavItems, secondaryNavItems } from '../../views/NavItems/NavItems';
 

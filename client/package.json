@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "chart.js": "^2.7.3",
+    "leaflet": "^1.5.1",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.3",
