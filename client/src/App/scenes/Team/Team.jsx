@@ -44,6 +44,7 @@ export const Team = () => {
         />
         <CardMedia
           className={teamStyles.media}
+          image="./images/kitty.jpg"
           alt="should be rendering yo"
           title="Paella dish"
         />
