@@ -1,8 +1,10 @@
 import React from "react";
+
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import './Map.css';
+import { withStyles } from '@material-ui/core/styles';
+import { mapStyles } from "./mapStyles";
 
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -54,9 +56,11 @@ class MapComponent extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     const local_position = [this.state.location.lat, this.state.location.lng]
     return (
-      <Map className="leafletMap" center={local_position} zoom={this.state.zoom}>
+      <Map className={classes.mapContent} center={local_position} zoom={this.state.zoom}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -76,4 +80,4 @@ class MapComponent extends React.Component {
   }
 }
 
-export default (MapComponent);
+export default withStyles(mapStyles)(MapComponent);
