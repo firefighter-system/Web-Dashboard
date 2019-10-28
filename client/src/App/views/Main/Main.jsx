@@ -1,10 +1,11 @@
 import React from 'react';
 
 import Dashboard from "../../scenes/Dashboard/Dashboard";
-import Team from "../../scenes/Team/Team";
+import { Team } from "../../scenes/Team/Team";
 import Humidity from "../../scenes/Humidity/Humidity";
 import Vitals from "../../scenes/Vitals/Vitals";
 import Map from "../../scenes/Map/Map";
+
 import Contact from "../../scenes/Contact/Contact";
 import PastMissions from "../../scenes/PastMissions/PastMissions";
 import Settings from "../../scenes/Settings/Settings";

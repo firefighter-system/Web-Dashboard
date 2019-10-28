@@ -17,11 +17,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
-import { withStyles } from '@material-ui/core/styles';
-
 import Main from "../views/Main/Main";
 import { primaryNavItems, secondaryNavItems } from '../views/NavItems';
 
+import { withStyles } from '@material-ui/core/styles';
 import { homeStyles } from './homeStyles';
 
 class Home extends Component {
@@ -43,7 +42,7 @@ class Home extends Component {
 
     return (
       <Router>
-        <div className={classes.root} id="dashboard-component">
+        <div className={classes.homeComponent} id="dashboard-component">
           <CssBaseline />
           <AppBar
             position="absolute"

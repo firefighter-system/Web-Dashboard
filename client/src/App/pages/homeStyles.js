@@ -3,7 +3,8 @@ import { colors } from "../../stylesheets/colors";
 
 const drawerWidth = 240;
 const homeStyles = theme => ({
-  root: {
+  homeComponent: {
+    marginTop:'3rem', 
     display: 'flex',
   },
   toolbar: {
