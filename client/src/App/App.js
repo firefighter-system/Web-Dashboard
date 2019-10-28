@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
 
