@@ -1,109 +1,95 @@
-const { ApolloServer, ApolloError, ValidationError, gql } = require('apollo-server'); 
+const express = require("express"); 
 
-var admin = require("firebase-admin");
+const { ApolloServer, ApolloError, ValidationError, gql } = require('apollo-server-express'); 
 const serviceAccount = require('../serviceAccountKey.json');
 
+const functions = require("firebase-functions"); 
+
+var admin = require("firebase-admin");
+
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://firefightingmonitoringsystem.firebaseio.com"
 });
 
-interface User {
-  id: string;
-  name: string;
-  screenName: string;
-  statusesCount: number;
+interface PiData {
+  id: string; 
+  timeStamp: TimeStamp;
 }
 
-interface Tweet {
-  id: string;
-  likes: number;
-  text: string;
-  userId: string;
+interface TimeStamp {
+  id: string; 
+  timeStamp: string; 
+  users: [User]; 
+}
+
+interface User {
+  id: string; 
+  userData: UserData;
+}
+
+interface UserData {
+  id: string; 
+  chestTemperature: number; 
+  externalTemperature: number; 
+  //TODO: change the heartbeat to heartRate
+  heartbeat: number; 
+  humidity: number; 
 }
 
 const typeDefs = gql`
-  # A Twitter User
-  type User {
-    id: ID!
-    name: String!
-    screenName: String!
-    statusesCount: Int!
-    tweets: [Tweets]!
+  type PiData {
+    id: String!
+    timeStamp: TimeStamp
   }
-  # A Tweet Object
-  type Tweets {
-    id: ID!
-    text: String!
-    userId: String!
-    user: User!
-    likes: Int!
-  }
-  type Query {
-    tweets: [Tweets]
-    user(id: String!): User
-  }
-`;
+
+  # Generated Data 
+    type TimeStamp {
+      id: ID!
+      timeStamp: String!
+      users: [UserData]
+    }
+
+  # A User 
+    type User {
+      id: ID!
+      userData: UserData
+    }
+
+  # A UserData 
+    type UserData {
+      id: ID!
+      chestTemperature: Int!
+      externalTemperature: Int!
+      heartbeat: Int!
+      humidity: Int!
+    }
+
+    type Query {
+      users: [User]
+      usersData: [UserData]
+      piData: [TimeStamp]
+    }
+`; 
 
 const resolvers = {
-  Query: {
-    async tweets() {
-      const tweets = await admin
-        .firestore()
-        .collection('tweets')
-        .get();
-      return tweets.docs.map(tweet => tweet.data()) as Tweet[];
-    },
-    async user(_: null, args: { id: string }) {
-      try {
-        const userDoc = await admin
-          .firestore()
-          .doc(`users/${args.id}`)
-          .get();
-        const user = userDoc.data() as User | undefined;
-        return user || new ValidationError('User ID not found');
-      } catch (error) {
-        throw new ApolloError(error);
-      }
+    Query: {
+      piData: () =>
+      admin.database()
+        .ref("pi_data")
+        .once("value")
+        .then(snap => snap.val())  
+        .then(val => Object.keys(val).map(key => val[key]))
     }
-  },
-  User: {
-    async tweets(user) {
-      try {
-        const userTweets = await admin
-          .firestore()
-          .collection('tweets')
-          .where('userId', '==', user.id)
-          .get();
-        return userTweets.docs.map(tweet => tweet.data()) as Tweet[];
-      } catch (error) {
-        throw new ApolloError(error);
-      }
-    }
-  },
-  Tweets: {
-    async user(tweet) {
-      try {
-        const tweetAuthor = await admin
-          .firestore()
-          .doc(`users/${tweet.userId}`)
-          .get();
-        return tweetAuthor.data() as User;
-      } catch (error) {
-        throw new ApolloError(error);
-      }
-    }
-  }
-};
+  };
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  engine: {
-    apiKey: "<APOLLO ENGINE API KEY HERE>"
-  },
-  introspection: true
-});
+  
+  
+  const server = new ApolloServer({ typeDefs, resolvers }); 
 
-server.listen({ port: process.env.PORT || 5000 }).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+  const app = express(); 
+  server.applyMiddleware({ app });
+
+  app.listen({ port: 5000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+);
