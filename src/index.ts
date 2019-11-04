@@ -32,7 +32,6 @@ interface UserData {
   id: string; 
   chestTemperature: number; 
   externalTemperature: number; 
-  //TODO: change the heartbeat to heartRate
   heartbeat: number; 
   humidity: number; 
 }
@@ -76,7 +75,7 @@ const resolvers = {
     Query: {
       piData: () =>
       admin.database()
-        .ref("pi_data")
+        .ref("piData")
         .once("value")
         .then(snap => snap.val())  
         .then(val => Object.keys(val).map(key => val[key]))
@@ -91,5 +90,5 @@ const resolvers = {
   server.applyMiddleware({ app });
 
   app.listen({ port: 5000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+  console.log(`🚀 Server ready at http://localhost:5000${server.graphqlPath}`)
 );
