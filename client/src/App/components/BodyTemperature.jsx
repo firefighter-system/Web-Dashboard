@@ -48,14 +48,14 @@ class BodyTemperature extends React.Component {
       maintainAspectRatio: false,
       scales: {
         xAxes: [
-            {
-              barPercentage: 1,
-              gridLines: {
-                display: true,
-                color: "rgba(0, 0, 0, 0.1)"
-              }
+          {
+            barPercentage: 1,
+            gridLines: {
+              display: true,
+              color: "rgba(0, 0, 0, 0.1)"
             }
-          ],
+          }
+        ],
         yAxes: [
           {
             gridLines: {
@@ -121,7 +121,7 @@ class BodyTemperature extends React.Component {
     return (
       <div>
         <ResponsiveContainer width="99%" height={320}>
-          <Bar data={this.state.dataBar} options = {this.state.barChartOptions}/>
+          <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
         </ResponsiveContainer>
       </div>
     );
