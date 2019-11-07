@@ -8,6 +8,27 @@ import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
 import Tooltip from 'recharts/lib/component/Tooltip';
 import Legend from 'recharts/lib/component/Legend';
 
+import { WebSocketLink } from 'apollo-link-ws';
+import { PubSub } from 'graphql-subscriptions';
+import { SubscriptionClient } from "subscriptions-transport-ws";
+
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:6000/`,
+  options: {
+    reconnect: true
+  }
+});
+
+
+const GRAPHQL_ENDPOINT = "ws://localhost:6000/graphql";
+const client = new SubscriptionClient(GRAPHQL_ENDPOINT, {
+  reconnect: true
+});
+
+const link = new WebSocketLink(client);
+
+
+
 const data = [
   { name: 'Mon', Visits: 2200, Orders: 3400 },
   { name: 'Tue', Visits: 1280, Orders: 2398 },

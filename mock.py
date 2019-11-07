@@ -45,5 +45,3 @@ while True:
   yuhan_et_node = db.child("pi_data").child("users").child("yuhan").child("externalTemperature").set(externalTemperature); 
   yuhan_hr_node = db.child("pi_data").child("users").child("yuhan").child("heartRate").set(heartRate); 
   yuhan_hum_node = db.child("pi_data").child("users").child("yuhan").child("humidity").set(humidity); 
-
-
