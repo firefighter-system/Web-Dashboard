@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
-import SimpleLineChart from '../../views/SimpleLineChart';
 
 import Typography from '@material-ui/core/Typography';
 
 import ExternalTemperature from '../../components/BodyTemperature';
 import BodyTemperature from '../../components/BodyTemperature';
 import ExternalPressure from '../../components/ExternalPressure';
+import HeartRate from '../../components/HeartRate';
+
 import { dashboardStyles } from "./dashboardStyles";
 
 
@@ -28,7 +29,7 @@ class Dashboard extends React.Component {
                 Heart Rate
             </Typography>
               <Typography component="div" className={classes.chartContainer}>
-                <SimpleLineChart />
+                <HeartRate />
               </Typography>
             </Grid>
 

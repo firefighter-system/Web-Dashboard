@@ -6,7 +6,7 @@ import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
 
 const styles = theme => ({
   "chart-container": {
-    height: 320 
+    height: 320
   }
 });
 
@@ -90,11 +90,10 @@ class ExternalTemperature extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <ResponsiveContainer width="99%" height={320}>
-          <Line data={this.state.lineChartData} options = {this.state.lineChartOptions}/>
+          <Line data={this.state.lineChartData} options={this.state.lineChartOptions} />
         </ResponsiveContainer>
       </div>
     );

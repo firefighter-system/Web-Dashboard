@@ -71,51 +71,6 @@ class BodyTemperature extends React.Component {
     }
   };
 
-  // componentDidMount() {
-  //   //Handles connecting/ disconnecting the feed and updating the component's state with newly fetched data
-  //   const subscribe = {
-  //     type: "subscribe",
-  //     channels: [{
-  //       name: "ticker",
-  //       product_ids: ["BTC-USD"]
-  //     }]
-  //   };
-
-  //   this.ws = new WebSocket("wss://ws-feed.gdax.com");
-
-  //   this.ws.onopen = () => {
-  //     this.ws.send(JSON.stringify(subscribe));
-  //   };
-
-  //   this.ws.onmessage = e => {
-  //     const value = JSON.parse(e.data);
-  //     if (value.type !== "ticker") {
-  //       return;
-  //     }
-
-  //     const oldBtcDataSet = this.state.lineChartData.datasets[0];
-  //     const newBtcDataSet = {
-  //       ...oldBtcDataSet
-  //     };
-  //     newBtcDataSet.data.push(value.price);
-
-  //     const newChartData = {
-  //       ...this.state.lineChartData,
-  //       datasets: [newBtcDataSet],
-  //       labels: this.state.lineChartData.labels.concat(
-  //         new Date().toLocaleTimeString()
-  //       )
-  //     };
-  //     this.setState({
-  //       lineChartData: newChartData
-  //     });
-  //   };
-  // }
-
-  // componentWillUnmount() {
-  //   this.ws.close();
-  // }
-
   render() {
 
     return (

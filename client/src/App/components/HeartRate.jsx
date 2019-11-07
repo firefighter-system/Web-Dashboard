@@ -18,7 +18,7 @@ const data = [
   { name: 'Sun', Visits: 4490, Orders: 4300 },
 ];
 
-function SimpleLineChart() {
+function HearRate() {
   return (
     // 99% per https://github.com/recharts/recharts/issues/172
     <ResponsiveContainer width="99%" height={320}>
@@ -35,4 +35,4 @@ function SimpleLineChart() {
   );
 }
 
-export default SimpleLineChart;
+export default HearRate;
