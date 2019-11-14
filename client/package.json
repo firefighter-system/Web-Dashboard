@@ -10,6 +10,7 @@
     "apollo-link-ws": "^1.0.19",
     "chart.js": "^2.7.3",
     "clsx": "^1.0.4",
+    "firebase": "^7.3.0",
     "graphql": "^14.5.8",
     "leaflet": "^1.5.1",
     "moment": "^2.24.0",

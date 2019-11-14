@@ -16,6 +16,8 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupIcon from '@material-ui/icons/GroupWork';
 
+import "./NavItems/navItemsStyles"
+
 export const primaryNavItems = (
   <div>
     <Link to="/">

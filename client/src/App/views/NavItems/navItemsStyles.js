@@ -87,7 +87,7 @@ const navItemsStyles = theme => ({
     marginBottom: theme.spacing.unit * 2,
   },
   ul: {
-    listStyleType: none,
+    listStyleType: 'none',
   },
 });
 
