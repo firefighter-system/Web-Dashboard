@@ -155,10 +155,10 @@ class BdyTemperature extends React.Component {
           <CartesianGrid vertical={false} strokeDasharray="3 3" />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="User1" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="User2" stroke="#8284d8" />
-          <Line type="monotone" dataKey="User3" stroke="#848445" />
-          <Line type="monotone" dataKey="User4" stroke="#8a1445" />
+          <Line type="monotone" dataKey="User1" stroke="#82ca9d" isAnimationActive={false} />
+          <Line type="monotone" dataKey="User2" stroke="#8284d8" isAnimationActive={false} />
+          <Line type="monotone" dataKey="User3" stroke="#848445" isAnimationActive={false} />
+          <Line type="monotone" dataKey="User4" stroke="#8a1445" isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
     );
