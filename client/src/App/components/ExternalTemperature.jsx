@@ -1,104 +1,185 @@
 import React from 'react';
-import { Line } from "react-chartjs-2";
-import { withStyles } from '@material-ui/core/styles';
-
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
+import LineChart from 'recharts/lib/chart/LineChart';
+import Line from 'recharts/lib/cartesian/Line';
+import XAxis from 'recharts/lib/cartesian/XAxis';
+import YAxis from 'recharts/lib/cartesian/YAxis';
+import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
+import Tooltip from 'recharts/lib/component/Tooltip';
+import Legend from 'recharts/lib/component/Legend';
 
-const styles = theme => ({
-  "chart-container": {
-    height: 320
-  }
-});
+import { WebSocketLink } from 'apollo-link-ws';
+import { PubSub } from 'graphql-subscriptions';
+import { SubscriptionClient } from "subscriptions-transport-ws";
 
-class ExternalTemperature extends React.Component {
+import firebaseConfig from "../firebase"
+
+// var database = firebaseConfig.database();
+
+// var ref1 = database.ref('pi_data/users/usr1');
+// ref1.on('value', data => {
+//   console.log(data.val())
+//   // handle the data here
+// })
+
+// var ref2 = database.ref('pi_data/users/usr2');
+// ref2.on('value', data => {
+//   console.log(data.val())
+//   // handle the data here
+// })
+
+// const wsLink = new WebSocketLink({
+//   uri: `ws://localhost:9000/`,
+//   options: {
+//     reconnect: true
+//   }
+// });
+
+// const GRAPHQL_ENDPOINT = "ws://localhost:9000/graphql";
+// const client = new SubscriptionClient(GRAPHQL_ENDPOINT, {
+//   reconnect: true
+// });
+
+// const link = new WebSocketLink(client);
+
+// const data = [ // y coordinate should be heart rate, x should be time, with multiple lines for the diff ppl
+//   { name: 'Mon', Visits: 2200, Orders: 3400 },
+//   { name: 'Tue', Visits: 1280, Orders: 2398 },
+//   { name: 'Wed', Visits: 5000, Orders: 4300 },
+//   { name: 'Thu', Visits: 4780, Orders: 2908 },
+//   { name: 'Fri', Visits: 5890, Orders: 4800 },
+//   { name: 'Sat', Visits: 4390, Orders: 3800 },
+//   { name: 'Sun', Visits: 4490, Orders: 4300 },
+// ];
+
+class ExTemperature extends React.Component {
+// const HearRate = () => {
+
   state = {
-    lineChartData: {
-      labels: [],
-      datasets: [{
-        type: "line",
-        label: "Filip",
-        backgroundColor: "rgba(0, 0, 0, 0)",
-        borderColor: this.props.theme.palette.primary.main,
-        pointBackgroundColor: this.props.theme.palette.secondary.main,
-        pointBorderColor: this.props.theme.palette.secondary.main,
-        borderWidth: "2",
-        lineTension: 0.45,
-        data: []
-        //data array initially empty
-      }]
-    },
-    lineChartOptions: {
-      responsive: true,
-      maintainAspectRatio: false,
-      tooltips: {
-        enabled: true
-      },
-      scales: {
-        xAxes: [{
-          ticks: {
-            autoSkip: true,
-            maxTicksLimit: 10
-          }
-        }]
-      }
-    }
-  };
+    user1_data: null,
+    user2_data: null,
+    user3_data: null,
+    user4_data: null
+  }
 
   componentDidMount() {
-    //Handles connecting/ disconnecting the feed and updating the component's state with newly fetched data
-    const subscribe = {
-      type: "subscribe",
-      channels: [{
-        name: "ticker",
-        product_ids: ["BTC-USD"]
-      }]
-    };
+    var database = firebaseConfig.database();
 
-    this.ws = new WebSocket("wss://ws-feed.gdax.com");
-
-    this.ws.onopen = () => {
-      this.ws.send(JSON.stringify(subscribe));
-    };
-
-    this.ws.onmessage = e => {
-      const value = JSON.parse(e.data);
-      if (value.type !== "ticker") {
-        return;
-      }
-
-      const oldBtcDataSet = this.state.lineChartData.datasets[0];
-      const newBtcDataSet = {
-        ...oldBtcDataSet
-      };
-      newBtcDataSet.data.push(value.price);
-
-      const newChartData = {
-        ...this.state.lineChartData,
-        datasets: [newBtcDataSet],
-        labels: this.state.lineChartData.labels.concat(
-          new Date().toLocaleTimeString()
-        )
-      };
+    var ref1 = database.ref('pi_data/users/usr1');
+    ref1.on('value', data => {
+      console.log(data.val())
+      // state.state_data = data.val();
       this.setState({
-        lineChartData: newChartData
-      });
-    };
+        user1_data: data.val()
+      })
+    })
+
+    var ref2 = database.ref('pi_data/users/usr2');
+    ref2.on('value', data => {
+      // console.log(data.val())
+      this.setState({
+        user2_data: data.val()
+      })
+    })
+
+    var ref3 = database.ref('pi_data/users/usr3');
+    ref3.on('value', data => {
+      // console.log(data.val())
+      this.setState({
+        user3_data: data.val()
+      })
+    })
+
+    var ref4 = database.ref('pi_data/users/usr4');
+    ref4.on('value', data => {
+      // console.log(data.val())
+      this.setState({
+        user4_data: data.val()
+      })
+    })
+
+    const wsLink = new WebSocketLink({
+      uri: `ws://localhost:9000/`,
+      options: {
+        reconnect: true
+      }
+    });
+  
+    const GRAPHQL_ENDPOINT = "ws://localhost:9000/graphql";
+    const client = new SubscriptionClient(GRAPHQL_ENDPOINT, {
+      reconnect: true
+    });
+  
+    const link = new WebSocketLink(client);
   }
 
-  componentWillUnmount() {
-    this.ws.close();
-  }
-
+  // test = () => {
+  //   return this.state.state_data && [Object.keys(this.state.state_data)].map( (a) => {
+  //     console.log(a)
+  //     console.log('testingggg')
+  //   })
+  // }
+  
   render() {
+
+    let date_object = {
+      chestTemperature: 0,
+      externalTemperature: 0,
+      heartRate: 0,
+      humidity: 0
+    }
+
+    let user_1_data = this.state.user1_data ? this.state.user1_data : date_object
+    let user_2_data = this.state.user2_data ? this.state.user2_data : date_object
+    let user_3_data = this.state.user3_data ? this.state.user3_data : date_object
+    let user_4_data = this.state.user4_data ? this.state.user4_data : date_object
+
+    let data = [ // y coordinate should be heart rate, x should be time, with multiple lines for the diff ppl
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-7]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-7]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-7]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-7]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-7]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-7]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-7]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-7]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-7]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-7]].externalTemperature : 0 },
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-6]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-6]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-6]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-6]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-6]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-6]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-6]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-6]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-6]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-6]].externalTemperature : 0 },
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-5]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-5]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-5]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-5]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-5]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-5]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-5]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-5]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-5]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-5]].externalTemperature : 0 },
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-4]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-4]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-4]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-4]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-4]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-4]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-4]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-4]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-4]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-4]].externalTemperature : 0 },
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-3]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-3]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-3]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-3]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-3]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-3]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-3]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-3]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-3]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-3]].externalTemperature : 0 },
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-2]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-2]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-2]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-2]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-2]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-2]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-2]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-2]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-2]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-2]].externalTemperature : 0 },
+      { name: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]].dateTime : '', User1: user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-1]] ? user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-1]].externalTemperature : 0, User2: user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-1]] ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-1]].externalTemperature : 0, User3: user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-1]] ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-1]].externalTemperature : 0, User4: user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]].externalTemperature : 0 },
+    ];
+
     return (
-      <div>
-        <ResponsiveContainer width="99%" height={320}>
-          <Line data={this.state.lineChartData} options={this.state.lineChartOptions} />
-        </ResponsiveContainer>
-      </div>
+      // 99% per https://github.com/recharts/recharts/issues/172
+      
+      <ResponsiveContainer width="99%" height={320}>
+        <LineChart data={data}>
+          {this.state.user1_data && console.log(this.state.user1_data[Object.keys(this.state.user1_data)[0]].dateTime, "test")} 
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid vertical={false} strokeDasharray="3 3" />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="User1" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="User2" stroke="#8284d8" />
+          <Line type="monotone" dataKey="User3" stroke="#848445" />
+          <Line type="monotone" dataKey="User4" stroke="#8a1445" />
+        </LineChart>
+      </ResponsiveContainer>
     );
   }
 }
 
+// function HearRate() {
+//   return (
+//     // 99% per https://github.com/recharts/recharts/issues/172
+//     <ResponsiveContainer width="99%" height={320}>
+//       <LineChart data={data}>
+//         <XAxis dataKey="name" />
+//         <YAxis />
+//         <CartesianGrid vertical={false} strokeDasharray="3 3" />
+//         <Tooltip />
+//         <Legend />
+//         <Line type="monotone" dataKey="Visits" stroke="#82ca9d" />
+//         <Line type="monotone" dataKey="Orders" stroke="#8884d8" activeDot={{ r: 8 }} />
+//       </LineChart>
+//     </ResponsiveContainer>
+//   );
+// } user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-7]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-7]] : 0
 
-export default withStyles(styles, { withTheme: true })(ExternalTemperature);
+export default ExTemperature;
