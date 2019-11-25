@@ -10,19 +10,25 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import RingIcon from '@material-ui/icons/RingVolume';
+import GraphicIcon from '@material-ui/icons/GraphicEq';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import { singleCardStyles } from "./singleCardStyles";
 
-export const SingleCard = () => {
+export const SingleCard = ({ userName }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const getCurrentTime = () => {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + '-' + today.getMilliseconds();
+    return date;
+  }
 
   return (
     <div className={singleCardStyles.cardWrapper}>
@@ -38,8 +44,8 @@ export const SingleCard = () => {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={userName}
+          subheader={getCurrentTime()}
         />
         <CardMedia
           className={singleCardStyles.media}
@@ -49,17 +55,21 @@ export const SingleCard = () => {
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
-    </Typography>
+            Current Condition:
+
+             <Typography variant="inline" color="textSecondary" component="b">
+              good
+            </Typography>
+          </Typography>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <GraphicIcon />
           </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
+          <IconButton aria-label="add to favorites">
+            <RingIcon />
           </IconButton>
+
           <IconButton
             className={clsx(singleCardStyles.expand, {
               [singleCardStyles.expandOpen]: expanded,
