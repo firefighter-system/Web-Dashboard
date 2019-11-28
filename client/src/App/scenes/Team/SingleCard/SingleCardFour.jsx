@@ -19,7 +19,7 @@ import { singleCardStyles } from "./singleCardStyles";
 
 import firebaseConfig from "../../../firebase";
 
-class SingleCard extends React.Component {
+class SingleCardFour extends React.Component {
 
   state = {
     expanded: false,
@@ -29,7 +29,7 @@ class SingleCard extends React.Component {
   componentDidMount() {
     var database = firebaseConfig.database();
 
-    var ref = database.ref('pi_data/users/usr1');
+    var ref = database.ref('pi_data/users/usr4');
     ref.on('value', data => {
       console.log(data.val())
       this.setState({
@@ -67,7 +67,7 @@ class SingleCard extends React.Component {
           <CardHeader
             avatar={
               <Avatar aria-label="recipe" className={singleCardStyles.avatar}>
-                1
+                4
         </Avatar>
             }
             action={
@@ -75,7 +75,7 @@ class SingleCard extends React.Component {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={'User 1'}
+            title={'User 4'}
             subheader={getCurrentTime()}
           />
           <CardMedia
@@ -136,4 +136,4 @@ class SingleCard extends React.Component {
   }
 }
 
-export default SingleCard;
+export default SingleCardFour;
