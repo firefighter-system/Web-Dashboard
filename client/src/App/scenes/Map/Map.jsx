@@ -18,14 +18,6 @@ var customIcon = L.icon({
 });
 
 class MapComponent extends React.Component {
-  // state = {
-  //   location: {
-  //     lat: 45.41117,
-  //     lng: -75.69812
-  //   },
-  //   haveLocation: false,
-  //   zoom: 2,
-  // }
 
   state = {
     default_location: {
@@ -44,34 +36,6 @@ class MapComponent extends React.Component {
   }
 
   componentDidMount() {
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   this.setState({
-    //     location: {
-    //       lat: position.coords.latitude,
-    //       lng: position.coords.longitude
-    //     },
-    //     haveLocation: true,
-    //     zoom: 13,
-    //   });
-    //   console.log(position);
-    // }, () => {
-    //   // this else function can be altered later
-    //   console.log('Location Unavailable');
-    //   fetch('https://ipapi.co/json')
-    //     .then(res => res.json())
-    //     .then(response => {
-    //       console.log(response)
-    //       this.setState({
-    //         location: {
-    //           lat: response.latitude,
-    //           lng: response.longitude
-    //         },
-    //         haveLocation: true,
-    //         zoom: 13,
-    //       });
-    //     });
-    // });
-
     var database = firebaseConfig.database();
 
     var ref1 = database.ref('pi_data/users/usr1');
@@ -142,7 +106,6 @@ class MapComponent extends React.Component {
     let user_2_data = this.state.user2_data ? this.state.user2_data : date_object
     let user_3_data = this.state.user3_data ? this.state.user3_data : date_object
     let user_4_data = this.state.user4_data ? this.state.user4_data : date_object
-    // let user_4_data = this.state.user4_data ? this.state.user4_data : this.state.default_location
     console.log(user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-1]])
 
     let default_position = [date_object.lat, date_object.lng]
@@ -150,8 +113,6 @@ class MapComponent extends React.Component {
     let user2_local_position = [this.state.user2_data ? user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-1]].gpsN : this.state.default_location.lat, this.state.user2_data ? -user_2_data[Object.keys(user_2_data)[Object.keys(user_2_data).length-1]].gpsW : this.state.default_location.lng]
     let user3_local_position = [this.state.user3_data ? user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-1]].gpsN : this.state.default_location.lat, this.state.user3_data ? -user_3_data[Object.keys(user_3_data)[Object.keys(user_3_data).length-1]].gpsW : this.state.default_location.lng]
     let user4_local_position = [this.state.user4_data ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]].gpsN : this.state.default_location.lat, this.state.user4_data ? -user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]].gpsW : this.state.default_location.lng]
-    // let user4_local_position = [user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]] ? user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]].gpsN : this.state.default_location.lat, user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]] ? -user_4_data[Object.keys(user_4_data)[Object.keys(user_4_data).length-1]].gpsW : this.state.default_location.lng]
-    // console.log(user_1_data[Object.keys(user_1_data)[Object.keys(user_1_data).length-1]].gpsN)
     console.log(default_position)
     console.log(user1_local_position)
     return (
