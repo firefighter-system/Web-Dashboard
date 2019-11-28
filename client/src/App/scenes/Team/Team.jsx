@@ -9,21 +9,22 @@ export const Team = () => {
   // userNames = ["Filip Matic", "Franko Kalsi", "Arsham Jalayer", "Yuhan Lee"];
 
   //TODO: Graph all users and do .map
-  const renderSingleCard = () => {
-    return <SingleCard userName={"Filip Matic"} />;
+  const renderSingleCardUser1 = () => {
+    return <SingleCard userName={"User 1"} />;
   }
+
+  // const renderSingleCardUser2 = () => {
+  //   return <SingleCard userName={"User 2"} />;
+  // }
 
   return (
     <div className={teamStyles.teamComponent} >
       <Grid container spacing={10} style={{ marginTop: '2rem' }}>
         <Grid item xs={4}>
-          {renderSingleCard()}
+          {renderSingleCardUser1()}
         </Grid>
         {/* <Grid item xs={4}>
-          {renderSingleCard()}
-        </Grid>
-        <Grid item xs={4}>
-          {renderSingleCard()}
+          {renderSingleCardUser2()}
         </Grid> */}
       </Grid>
     </div>

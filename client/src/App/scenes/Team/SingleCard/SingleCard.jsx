@@ -26,7 +26,7 @@ export const SingleCard = ({ userName }) => {
 
   const getCurrentTime = () => {
     var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + '-' + today.getMilliseconds();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' -- ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     return date;
   }
 
