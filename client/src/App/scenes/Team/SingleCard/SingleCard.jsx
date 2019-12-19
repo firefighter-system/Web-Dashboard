@@ -80,9 +80,8 @@ class SingleCard extends React.Component {
           />
           <CardMedia
             className={singleCardStyles.media}
-            image="./images/kitty.jpg"
-            alt="should be rendering yo"
-            title="Paella dish"
+            alt="Rendering"
+            title="User1"
           />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">

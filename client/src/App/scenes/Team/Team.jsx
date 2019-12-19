@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SingleCard from "./SingleCard/SingleCard";
 import SingleCardTwo from "./SingleCard/SingleCardTwo";
 import SingleCardThree from "./SingleCard/SingleCardThree";

@@ -34,7 +34,7 @@ export const primaryNavItems = (
       </ListItem>
     </Link>
 
-    <Link to="/vitals">
+    {/* <Link to="/vitals">
       <ListItem button>
         <ListItemIcon><VitalsIcon /></ListItemIcon>
         <ListItemText primary="Vitals" />
@@ -46,7 +46,7 @@ export const primaryNavItems = (
         <ListItemIcon><WaterIcon /></ListItemIcon>
         <ListItemText primary="Humidity" />
       </ListItem>
-    </Link>
+    </Link> */}
 
     <Link to="/map">
       <ListItem button>
@@ -55,19 +55,19 @@ export const primaryNavItems = (
       </ListItem>
     </Link>
 
-    <Link to="/contact">
+    {/* <Link to="/contact">
       <ListItem button>
         <ListItemIcon><ContactIcon /></ListItemIcon>
         <ListItemText primary="Contact" />
       </ListItem>
-    </Link>
+    </Link> */}
   </div>
 
 );
 
 export const secondaryNavItems = (
   <div>
-    <ListSubheader inset>Others</ListSubheader>
+    {/* <ListSubheader inset>Others</ListSubheader>
 
     <Link to="/pastmissions">
       <ListItem button>
@@ -82,6 +82,6 @@ export const secondaryNavItems = (
         <ListItemIcon><SettingsIcon /></ListItemIcon>
         <ListItemText primary="Settings" />
       </ListItem>
-    </Link>
+    </Link> */}
   </div>
 );
