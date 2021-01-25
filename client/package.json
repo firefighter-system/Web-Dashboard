@@ -14,7 +14,7 @@
     "graphql": "^14.5.8",
     "leaflet": "^1.5.1",
     "moment": "^2.24.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "react": "^16.8.3",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.3",
